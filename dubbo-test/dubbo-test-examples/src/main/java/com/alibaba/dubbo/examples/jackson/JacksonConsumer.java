@@ -15,12 +15,15 @@
  */
 package com.alibaba.dubbo.examples.jackson;
 
-import com.alibaba.dubbo.examples.jackson.api.*;
-import com.google.common.collect.Lists;
+import java.util.Arrays;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Arrays;
-import java.util.List;
+import com.alibaba.dubbo.examples.jackson.api.Inherit;
+import com.alibaba.dubbo.examples.jackson.api.InheritBean;
+import com.alibaba.dubbo.examples.jackson.api.JacksonBean;
+import com.alibaba.dubbo.examples.jackson.api.JacksonInnerBean;
+import com.alibaba.dubbo.examples.jackson.api.JacksonService;
 
 /**
  * JacksonConsumer

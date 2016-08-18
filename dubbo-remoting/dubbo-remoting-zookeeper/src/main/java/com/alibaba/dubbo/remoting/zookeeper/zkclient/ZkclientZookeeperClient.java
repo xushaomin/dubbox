@@ -2,7 +2,6 @@ package com.alibaba.dubbo.remoting.zookeeper.zkclient;
 
 import java.util.List;
 
-import com.alibaba.dubbo.common.Constants;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
@@ -10,12 +9,17 @@ import org.I0Itec.zkclient.exception.ZkNoNodeException;
 import org.I0Itec.zkclient.exception.ZkNodeExistsException;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 
+import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.logger.Logger;
+import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.zookeeper.ChildListener;
 import com.alibaba.dubbo.remoting.zookeeper.StateListener;
 import com.alibaba.dubbo.remoting.zookeeper.support.AbstractZookeeperClient;
 
 public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildListener> {
+
+    private final static Logger logger = LoggerFactory.getLogger(ZkclientZookeeperClient.class);
 
 	private final ZkClient client;
 
@@ -38,6 +42,10 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
 			}
 			public void handleNewSession() throws Exception {
 				stateChanged(StateListener.RECONNECTED);
+			}
+			@Override
+			public void handleSessionEstablishmentError(Throwable error) throws Exception {
+				logger.error(error);
 			}
 		});
 	}
